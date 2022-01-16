@@ -144,10 +144,7 @@ def game():
     goal.rect.x = 200
     goal.rect.y = 100
 
-    from wall import wall
-    wall = wall(OTHER, 10 , 250)
-    wall.rect.x = 100
-    wall.rect.y = 100
+
 
 
 
@@ -165,7 +162,6 @@ def game():
     all_sprites_list.add(post3)
     all_sprites_list.add(ball)
     all_sprites_list.add(goal)
-    #all_sprites_list.add(wall)
 
     click=False
     running = True
