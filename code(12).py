@@ -17,7 +17,7 @@ pygame.init()
 
 #SETS THE WIDTH AND HEIGHT OF THE WINDOW
 SCREENWIDTH=1000
-SCREENHEIGHT=950
+SCREENHEIGHT=900
 size = (SCREENWIDTH, SCREENHEIGHT)
 screen = pygame.display.set_mode(size)
 #NAMING MY WINDOW WHEN THE GAME LOADS UP
@@ -38,6 +38,7 @@ score = 0
 font = pygame.font.SysFont(None, 20)
 WHITE = (255, 255, 255)
 OTHER = (100,100,100)
+BLACK = (0,0,0)
 
 
 def draw_text(text, font, color, surface, x, y):
@@ -50,13 +51,15 @@ click = False
 
 def main_menu():
 
-
+    bg = pygame.image.load("images/backgroundmain.jpg")
 
     while True:
 
 
 
-        screen.fill((0,0,0))
+
+
+        screen.blit(bg, (0 , 0))
         font = pygame.font.SysFont(None, 60)
         draw_text('F', font, (255, 204, 102), screen, 330, 250)
         draw_text('r', font, (255, 255, 153), screen, 355, 250)
@@ -78,8 +81,8 @@ def main_menu():
 
         mx, my = pygame.mouse.get_pos()
 
-        button_1 = pygame.Rect(250, 400, 200, 50)
-        button_2 = pygame.Rect(550, 400, 200, 50)
+        button_1 = pygame.Rect(250, 350, 200, 50)
+        button_2 = pygame.Rect(550, 350, 200, 50)
 
 
 
@@ -91,9 +94,9 @@ def main_menu():
                 help()
         pygame.draw.rect(screen, (0,0,0), button_1)
         font = pygame.font.SysFont(None, 80)
-        draw_text("START", font, (102, 255, 153), screen, 260, 400)
+        draw_text("START", font, (102, 255, 153), screen, 260, 350)
         pygame.draw.rect(screen, (0,0,0), button_2)
-        draw_text('HELP', font, (255, 102, 102), screen, 590, 400)
+        draw_text('HELP', font, (255, 102, 102), screen, 590, 350)
 
         click = False
         for event in pygame.event.get():
@@ -113,6 +116,8 @@ def main_menu():
 
 def game():
 
+    bg = pygame.image.load("images/backgroundgame.png")
+
     score = 0
 
     from post import post
@@ -129,7 +134,11 @@ def game():
     post3.rect.x = 200
     post3.rect.y = 100
 
-    post4 = pygame.draw.line(screen, WHITE, [0, 0], [100, 100], 5)
+    from bar import bar
+
+    bar = bar(BLACK, 1200, 80)
+    bar.rect.x = 0
+    bar.rect.y = 0
 
     from ball import ball
 
@@ -144,9 +153,7 @@ def game():
     goal.rect.x = 200
     goal.rect.y = 100
 
-
-
-
+    from target import target
 
 
 
@@ -162,13 +169,15 @@ def game():
     all_sprites_list.add(post3)
     all_sprites_list.add(ball)
     all_sprites_list.add(goal)
+    all_sprites_list.add(bar)
+    all_sprites_list.add(target)
 
     click=False
     running = True
+    scored=False
     while running:
-        screen.fill((0,0,0))
-        #background=pygame.image.load("images/backgroundmain.jpg")
-        #screen.blit(background,(0,0))
+        screen.blit(bg, (0 , 0))
+
         font = pygame.font.SysFont(None, 60)
         draw_text('F', font, (255, 204, 102), screen, 330, 30)
         draw_text('r', font, (255, 255, 153), screen, 355, 30)
@@ -196,8 +205,10 @@ def game():
                     click = True
         #GAME CODE HERE
 
-        if ball.rect.y>100 and ball.rect.y<350 and ball.rect.x>200 and ball.rect.x<800:
+        if ball.rect.y>100 and ball.rect.y<350 and ball.rect.x>200 and ball.rect.x<800 and scored==False:
             score+=1
+            scored=True
+
 
         font = pygame.font.SysFont(None, 20)
         draw_text("Score - " + str(score),font,(255,255,255), screen, 50, 50)
@@ -229,7 +240,11 @@ def game():
 
         if goal.rect.collidepoint((mx, my)):
             if click and ball.state=="static":
+                mytarget = target(mx,my)
+                target_list = pygame.sprite.Group()
+                target_list.add(mytarget)
                 ball.shoot((mx,my))
+                scored=False
                 click=False
 
         if ball.state=="moving":
@@ -276,7 +291,7 @@ def help():
         draw_text('5. Once the ball count does hit 0 the game will be over and you will be shown', font, (255, 255, 255), screen, 20, 400)
         draw_text('    your final score along with a game over message, this is then followed by the option to', font, (255, 255, 255), screen, 20, 420)
         draw_text('    the game again or exit if you have finished.', font, (255, 255, 255), screen, 20, 440)
-        draw_text('6. Now you are ready to play!.', font, (255, 255, 255), screen, 20, 500)
+        draw_text('6. Now you are ready to play!', font, (255, 255, 255), screen, 20, 500)
         pygame.display.update()
         mainClock.tick(60)
 
