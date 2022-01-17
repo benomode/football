@@ -216,11 +216,12 @@ def game():
         roty = ball.rect.centery
 
         if ball.state=="static":
+            if ball.target:
+                ball.target.kill()  # make sure if we miss that the target is removed
             angle = 270-math.atan2(pos[1]-roty,pos[0]-rotx)*180/math.pi
             rotimage = pygame.transform.rotate(arrow,angle)
             rect = rotimage.get_rect(center=(rotx,roty-100))
             screen.blit(rotimage,rect)
-
 
 
         keys = pygame.key.get_pressed()
@@ -238,6 +239,7 @@ def game():
             if click and ball.state=="static":
                 mytarget = target(mx,my)
                 target_list.add(mytarget)
+                ball.target = mytarget
                 ball.shoot((mx,my))
                 scored=False
                 click=False

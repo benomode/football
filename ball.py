@@ -1,5 +1,6 @@
 import pygame
 from target import target_list
+import random
 
 WHITE = (255,255,255)
 removeBallAfterMs = 1550   # number of milliseconds to wait until we remove the football
@@ -22,6 +23,8 @@ class ball(pygame.sprite.Sprite):
         self.rect = self.image.get_rect()
         self.state="static"
 
+        self.target = None
+
 
     def update(self):
         hit_list = pygame.sprite.spritecollide(self, target_list, False)
@@ -33,13 +36,14 @@ class ball(pygame.sprite.Sprite):
                 print("IT's A GOAL !!!!!!!")
                 # self.player.score += goal.score
                 # stats(self.player.score)
-                self.state = "static"
+                self.state = "stop"
                 self.time = pygame.time.get_ticks() # start a timer to remove the ball from the screen
 
         else:
                     # and x ms have elapsed, remove the football.
             if pygame.time.get_ticks() - self.time >= removeBallAfterMs:
-                self.kill()
+                self.time = None
+                self.reset()
 
     def curveRight(self, pixels):
         self.vx += pixels/100
@@ -53,6 +57,15 @@ class ball(pygame.sprite.Sprite):
         self.rect.y -= pixels
         if self.rect.y < 0:
             self.rect.y = 0
+
+
+    def reset(self):
+        # self.kill()
+        self.rect.x = 480
+        self.rect.y = 800
+        self.rect.x = random.randint(200,800)
+        self.target.kill()  # get rid of the target object
+        self.state = "static"
 
 
     def shoot(self, pos):
