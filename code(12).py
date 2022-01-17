@@ -11,6 +11,8 @@
 import pygame, sys
 import math
 import random
+from target import target
+from target import target_list
 mainClock = pygame.time.Clock()
 from pygame.locals import *
 pygame.init()
@@ -134,11 +136,11 @@ def game():
     post3.rect.x = 200
     post3.rect.y = 100
 
-    from bar import bar
+    # from bar import bar
 
-    bar = bar(BLACK, 1200, 80)
-    bar.rect.x = 0
-    bar.rect.y = 0
+    # bar = bar(BLACK, 1200, 80)
+    # bar.rect.x = 0
+    # bar.rect.y = 0
 
     from ball import ball
 
@@ -153,12 +155,6 @@ def game():
     goal.rect.x = 200
     goal.rect.y = 100
 
-    from target import target
-
-
-
-
-
 
 
     all_sprites_list = pygame.sprite.Group()
@@ -169,8 +165,8 @@ def game():
     all_sprites_list.add(post3)
     all_sprites_list.add(ball)
     all_sprites_list.add(goal)
-    all_sprites_list.add(bar)
-    all_sprites_list.add(target)
+    # all_sprites_list.add(bar)
+    # all_sprites_list.add(target)
 
     click=False
     running = True
@@ -241,7 +237,6 @@ def game():
         if goal.rect.collidepoint((mx, my)):
             if click and ball.state=="static":
                 mytarget = target(mx,my)
-                target_list = pygame.sprite.Group()
                 target_list.add(mytarget)
                 ball.shoot((mx,my))
                 scored=False
@@ -257,6 +252,10 @@ def game():
             click=False
 
 
+        target_list.draw(screen) # draw target
+        # for t in target_list:
+        #     t.update()
+        ball.update()
 
         all_sprites_list.draw(screen)
 
@@ -292,6 +291,8 @@ def help():
         draw_text('    your final score along with a game over message, this is then followed by the option to', font, (255, 255, 255), screen, 20, 420)
         draw_text('    the game again or exit if you have finished.', font, (255, 255, 255), screen, 20, 440)
         draw_text('6. Now you are ready to play!', font, (255, 255, 255), screen, 20, 500)
+
+
         pygame.display.update()
         mainClock.tick(60)
 

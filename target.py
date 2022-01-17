@@ -1,22 +1,19 @@
 import pygame
-WHITE = (100,100,100)
-OTHER = (100,100,100)
+import os
 
-class goal(pygame.sprite.Sprite):
+target_list = pygame.sprite.Group()
+
+class target(pygame.sprite.Sprite):
 
 
-    def __init__(self, color, width, height):
+    def __init__(self, x, y):
 
         super().__init__()
-
-
-        self.image = pygame.Surface([width, height])
-        self.image.fill(WHITE)
-        self.image.set_colorkey(OTHER)
-
-
-
-        pygame.draw.rect(self.image, color, [0, 0, width, height])
-
-
+        print("*********** making target")
+        self.image = pygame.image.load(os.path.join('images', 'target.png')).convert_alpha()
+#        self.image = pygame.image.load('target.png').convert_alpha()        
+        self.x = x
+        self.y = y
         self.rect = self.image.get_rect()
+        self.rect.x = x
+        self.rect.y = y
