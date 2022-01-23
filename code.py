@@ -11,6 +11,7 @@
 import pygame, sys
 import math
 import random
+import os
 from target import target
 from target import target_list
 mainClock = pygame.time.Clock()
@@ -120,8 +121,10 @@ def main_menu():
 def game():
 
     #bg = pygame.image.load("images/backgroundgame.png")
-    grass = pygame.image.load("grass.png").convert()
-    sky = pygame.image.load("sky_gradient.png").convert()
+    grass = pygame.image.load(os.path.join('images', 'grass.png')).convert()
+    # grass = pygame.transform.scale(grass, (1200, 300))
+    sky = pygame.image.load(os.path.join('images', 'sky_gradient.png')).convert()
+    # sky = pygame.transform.scale(sky, (1200, 800))
 
     score = 0
 
@@ -139,11 +142,6 @@ def game():
     post3.rect.x = 200
     post3.rect.y = 100
 
-    # from bar import bar
-
-    # bar = bar(BLACK, 1200, 80)
-    # bar.rect.x = 0
-    # bar.rect.y = 0
 
     from ball import ball
 
@@ -178,7 +176,7 @@ def game():
         #screen.blit(bg, (0 , 0))
         screen.fill((0, 0, 0))
         screen.blit(sky, (0, 0))
-        screen.blit(grass, (0, 500))
+        screen.blit(grass, (0, 300))
 
         font = pygame.font.SysFont(None, 60)
         draw_text('F', font, (255, 204, 102), screen, 330, 30)
