@@ -15,7 +15,7 @@ import os
 from target import target
 from target import target_list
 mainClock = pygame.time.Clock()
-from pygame.locals import *
+
 pygame.init()
 
 #SETS THE WIDTH AND HEIGHT OF THE WINDOW
