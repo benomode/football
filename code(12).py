@@ -10,11 +10,16 @@
 #-------------------------------------------------------------------------------
 import pygame, sys
 import math
+import os
 import random
 from target import target
 from target import target_list
 mainClock = pygame.time.Clock()
 from pygame.locals import *
+from ball import Ball
+from shadow import Shadow
+
+
 pygame.init()
 
 #SETS THE WIDTH AND HEIGHT OF THE WINDOW
@@ -43,7 +48,6 @@ OTHER = (100,100,100)
 BLACK = (0,0,0)
 
 
-
 def draw_text(text, font, color, surface, x, y):
     textobj = font.render(text, 1, color)
     textrect = textobj.get_rect()
@@ -55,7 +59,7 @@ click = False
 def main_menu():
 
     bg = pygame.image.load("images/backgroundmain.jpg")
-
+    click=False
     while True:
 
 
@@ -120,8 +124,8 @@ def main_menu():
 def game():
 
     #bg = pygame.image.load("images/backgroundgame.png")
-    grass = pygame.image.load("grass.png").convert()
-    sky = pygame.image.load("sky_gradient.png").convert()
+    grass = pygame.image.load(os.path.join('images', 'grass.png')).convert()
+    sky = pygame.image.load(os.path.join('images', 'sky_gradient.png')).convert()
 
     score = 0
 
@@ -139,18 +143,20 @@ def game():
     post3.rect.x = 200
     post3.rect.y = 100
 
-    # from bar import bar
 
-    # bar = bar(BLACK, 1200, 80)
-    # bar.rect.x = 0
-    # bar.rect.y = 0
 
-    from ball import ball
 
-    ball = ball(WHITE, 35, 35)
+    ball = Ball(WHITE, 35, 35)
     ball.rect.x = 480
     ball.rect.y = 800
     ball.rect.x = random.randint(200,800)
+    shadow = Shadow(WHITE, 35, 35)
+    shadow.rect.x = ball.rect.x
+    shadow.rect.y = ball.rect.y
+
+
+    ball.shadow = shadow
+    shadow.ball = ball
 
     from goal import goal
 
@@ -166,10 +172,10 @@ def game():
     all_sprites_list.add(post1)
     all_sprites_list.add(post2)
     all_sprites_list.add(post3)
+    all_sprites_list.add(shadow)
     all_sprites_list.add(ball)
     all_sprites_list.add(goal)
-    # all_sprites_list.add(bar)
-    # all_sprites_list.add(target)
+    #all_sprites_list.add(target)
 
     click=False
     running = True
@@ -178,7 +184,7 @@ def game():
         #screen.blit(bg, (0 , 0))
         screen.fill((0, 0, 0))
         screen.blit(sky, (0, 0))
-        screen.blit(grass, (0, 500))
+        screen.blit(grass, (0, 300))
 
         font = pygame.font.SysFont(None, 60)
         draw_text('F', font, (255, 204, 102), screen, 330, 30)
@@ -207,9 +213,10 @@ def game():
                     click = True
         #GAME CODE HERE
 
-        if ball.rect.y>100 and ball.rect.y<350 and ball.rect.x>200 and ball.rect.x<800 and scored==False:
+        if shadow.rect.y<325 and ball.rect.y>100 and ball.rect.y<350 and ball.rect.x>200 and ball.rect.x<800 and scored==False:
             score+=1
             scored=True
+            ball.state="reset"
 
 
         font = pygame.font.SysFont(None, 20)
@@ -233,8 +240,10 @@ def game():
         keys = pygame.key.get_pressed()
         if keys[pygame.K_RIGHT]:
             ball.curveRight(4)
+
         if keys[pygame.K_LEFT]:
             ball.curveLeft(4)
+
 
 
 
@@ -243,19 +252,25 @@ def game():
 
         if goal.rect.collidepoint((mx, my)):
             if click and ball.state=="static":
-                mytarget = target(mx,my)
+                mytarget = target(mx-25,my-25)
                 target_list.add(mytarget)
                 ball.target = mytarget
-                ball.shoot((mx,my))
+                ball.shoot((mx+25,my+25))
+
+
                 scored=False
                 click=False
 
         if ball.state=="moving":
             ball.move()
+
+
         if ball.state=="reset":
             click=True
             ball.rect.x = random.randint(200,800)
             ball.rect.y = 800
+            shadow.rect.x = ball.rect.x
+            shadow.rect.y = ball.rect.y
             ball.state="static"
             click=False
 
@@ -264,6 +279,7 @@ def game():
         # for t in target_list:
         #     t.update()
         ball.update()
+
 
         all_sprites_list.draw(screen)
 
