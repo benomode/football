@@ -1,5 +1,8 @@
 import pygame
 from target import target_list
+from goalkeeper import goalkeeper_list
+from goal import goal_list
+from player import player_list
 import random
 from math import tan, atan, radians, degrees
 
@@ -31,11 +34,24 @@ class Ball(pygame.sprite.Sprite):
 
 
     def update(self):
-        hit_list = pygame.sprite.spritecollide(self, target_list, False)
-        #for target in hit_list:
-        #     print("XXX GOAL !!!!!!!")
+
         if self.time is None:
-            if self.shadow.rect.y<325:
+                # did it hit a goal keeper sprite?
+            saved_list = pygame.sprite.spritecollide(self, goalkeeper_list, False)
+                # did it hit a goal sprite
+            goalscored_list = pygame.sprite.spritecollide(self, goal_list, False)
+            if saved_list:
+                print("SAVE !!!!!!!")
+                self.stop()
+
+            elif goalscored_list:
+                print("GOAL by hitting GOAL SPRITE !!!!!!!")
+                # give the player with the ball a goal
+                self.player.scored()
+                self.stop()
+
+            # elif self.shadow.rect.y<325:
+            else:
                 hit_list = pygame.sprite.spritecollide(self, target_list, False)
                 for target in hit_list:
                     print("IT's A GOAL !!!!!!!")
@@ -64,13 +80,21 @@ class Ball(pygame.sprite.Sprite):
         if self.rect.y < 0:
             self.rect.y = 0
 
+    def playerwithBall(self, player):
+        self.player = player
+
+    def stop(self):
+        self.state = "stop"
+        self.time = pygame.time.get_ticks() # start a timer to remove the ball from the screen
 
     def reset(self):
-        # self.kill()
         self.rect.x = 480
         self.rect.y = 800
         self.rect.x = random.randint(200,800)
         self.target.kill()  # get rid of the target object
+        self.shadow.rect.x = self.rect.x
+        self.shadow.rect.y = self.rect.y
+        self.shadow.ball = self
         self.state = "static"
 
 
