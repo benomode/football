@@ -14,6 +14,7 @@ import random
 import os
 from target import target
 from target import target_list
+from pygame.locals import *
 mainClock = pygame.time.Clock()
 
 pygame.init()

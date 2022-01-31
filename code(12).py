@@ -14,6 +14,7 @@ import os
 import random
 from target import target
 from target import target_list
+
 mainClock = pygame.time.Clock()
 from pygame.locals import *
 from ball import Ball
@@ -158,13 +159,26 @@ def game():
     ball.shadow = shadow
     shadow.ball = ball
 
-    from goal import goal
+    from goal import Goal
+    from goal import goal_list
 
-    goal = goal(OTHER, 600, 250)
+    goal = Goal(OTHER, 600, 250)
     goal.rect.x = 200
     goal.rect.y = 100
 
+    from goalkeeper import Goalkeeper
+    from goalkeeper import goalkeeper_list
 
+# SCREENWIDTH=1000
+# SCREENHEIGHT=900
+    Goalkeeper(420,180)
+
+    from player import Player
+    from player import player_list
+
+        # create a player
+    player = Player()
+    ball.playerwithBall(player)
 
     all_sprites_list = pygame.sprite.Group()
 
@@ -175,7 +189,9 @@ def game():
     all_sprites_list.add(shadow)
     all_sprites_list.add(ball)
     all_sprites_list.add(goal)
-    #all_sprites_list.add(target)
+    all_sprites_list.add(target_list)
+    all_sprites_list.add(goalkeeper_list)
+
 
     click=False
     running = True
@@ -269,13 +285,15 @@ def game():
             click=True
             ball.rect.x = random.randint(200,800)
             ball.rect.y = 800
-            shadow.rect.x = ball.rect.x
-            shadow.rect.y = ball.rect.y
+        #    shadow = Shadow(WHITE, 35, 35)
+
+
             ball.state="static"
             click=False
 
 
-        target_list.draw(screen) # draw target
+        # target_list.draw(screen) # draw target
+        # goalkeeper_list.draw(screen) # draw goalkeeper        
         # for t in target_list:
         #     t.update()
         ball.update()
