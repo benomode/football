@@ -15,6 +15,7 @@ class Goalkeeper(pygame.sprite.Sprite):
 
         print("*********** making goalkeeper")
         self.image = pygame.image.load(os.path.join('images', 'goalkeeper.png')).convert_alpha()
+        self.mask = pygame.mask.from_surface(self.image)
         self.rect = self.image.get_rect()
         self.rect.x = x
         self.rect.y = y
