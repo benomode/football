@@ -169,7 +169,7 @@ def game():
     from goalkeeper import goalkeeper_list
 
 
-    Goalkeeper(420,180)
+    goalie = Goalkeeper(420,180)
 
     from player import Player
     from player import player_list
@@ -250,7 +250,7 @@ def game():
             rotimage = pygame.transform.rotate(arrow,angle)
             rect = rotimage.get_rect(center=(rotx,roty-100))
             screen.blit(rotimage,rect)
-
+            
 
         keys = pygame.key.get_pressed()
         if keys[pygame.K_RIGHT]:
@@ -258,9 +258,6 @@ def game():
 
         if keys[pygame.K_LEFT]:
             ball.curveLeft(4)
-
-
-
 
 
         mx, my = pygame.mouse.get_pos()
@@ -271,6 +268,7 @@ def game():
                 target_list.add(mytarget)
                 ball.target = mytarget
                 ball.shoot((mx+25,my+25))
+                goalie.dive()
 
 
                 scored=False

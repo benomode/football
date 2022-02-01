@@ -55,8 +55,7 @@ class Ball(pygame.sprite.Sprite):
                     print("GOAL - hitting the target")
                     #self.player.score += goal.score
                     #stats(self.player.score)
-                    self.state = "stop"
-                    self.time = pygame.time.get_ticks() # start a timer to remove the ball from the screen
+                    self.stop()
 
         else:
                     # and x ms have elapsed, remove the football.
@@ -94,6 +93,8 @@ class Ball(pygame.sprite.Sprite):
         self.shadow.rect.y = self.rect.y
         self.shadow.ball = self
         self.state = "static"
+        for goalie in goalkeeper_list:
+            goalie.reset()
 
 
     def shoot(self, pos):
