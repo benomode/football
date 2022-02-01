@@ -23,11 +23,11 @@ class Ball(pygame.sprite.Sprite):
 
 
         self.image = pygame.image.load("ball2.png").convert_alpha()
+        self.mask = pygame.mask.from_surface(self.image)
         # Fetch the rectangle object that has the dimensions of the image.
         self.rect = self.image.get_rect()
         self.state="static"
         self.angle=0
-
         self.target = None
         self.shadow = None
 
@@ -37,24 +37,22 @@ class Ball(pygame.sprite.Sprite):
 
         if self.time is None:
                 # did it hit a goal keeper sprite?
-            saved_list = pygame.sprite.spritecollide(self, goalkeeper_list, False)
+            saved_list = pygame.sprite.spritecollide(self, goalkeeper_list, False,pygame.sprite.collide_mask)
                 # did it hit a goal sprite
             goalscored_list = pygame.sprite.spritecollide(self, goal_list, False)
-            if saved_list:
+            if saved_list and self.shadow.rect.y<335:
                 print("SAVE !!!!!!!")
                 self.stop()
 
-            elif goalscored_list:
-                print("GOAL by hitting GOAL SPRITE !!!!!!!")
+            elif goalscored_list and self.shadow.rect.y<325:
+                print("GOAL - hitting goal sprite")
                 # give the player with the ball a goal
                 self.player.scored()
                 self.stop()
 
-            # elif self.shadow.rect.y<325:
-            else:
                 hit_list = pygame.sprite.spritecollide(self, target_list, False)
                 for target in hit_list:
-                    print("IT's A GOAL !!!!!!!")
+                    print("GOAL - hitting the target")
                     #self.player.score += goal.score
                     #stats(self.player.score)
                     self.state = "stop"
@@ -103,7 +101,7 @@ class Ball(pygame.sprite.Sprite):
         self.vx = (pos[0]-self.rect.x) / 100
         self.vy = (pos[1]-self.rect.y) / 100
         self.angle =  30 * (350-pos[1])/250
-        print(self.angle)
+        #print(self.angle)
         self.shadow.shoot(pos)
 
     def move(self):
