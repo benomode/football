@@ -124,7 +124,6 @@ def main_menu():
 
 def game():
 
-    #bg = pygame.image.load("images/backgroundgame.png")
     grass = pygame.image.load(os.path.join('images', 'grass.png')).convert()
     sky = pygame.image.load(os.path.join('images', 'sky_gradient.png')).convert()
 
@@ -169,8 +168,7 @@ def game():
     from goalkeeper import Goalkeeper
     from goalkeeper import goalkeeper_list
 
-# SCREENWIDTH=1000
-# SCREENHEIGHT=900
+
     Goalkeeper(420,180)
 
     from player import Player
@@ -187,17 +185,17 @@ def game():
     all_sprites_list.add(post2)
     all_sprites_list.add(post3)
     all_sprites_list.add(shadow)
-    all_sprites_list.add(ball)
+
     all_sprites_list.add(goal)
     all_sprites_list.add(target_list)
     all_sprites_list.add(goalkeeper_list)
-
+    all_sprites_list.add(ball)
 
     click=False
     running = True
     scored=False
     while running:
-        #screen.blit(bg, (0 , 0))
+
         screen.fill((0, 0, 0))
         screen.blit(sky, (0, 0))
         screen.blit(grass, (0, 300))
@@ -229,14 +227,15 @@ def game():
                     click = True
         #GAME CODE HERE
 
-        if shadow.rect.y<325 and ball.rect.y>100 and ball.rect.y<350 and ball.rect.x>200 and ball.rect.x<800 and scored==False:
-            score+=1
-            scored=True
-            ball.state="reset"
+        #if shadow.rect.y<325 and ball.rect.y>100 and ball.rect.y<350 and ball.rect.x>200 and ball.rect.x<800 and scored==False:
+        #    score+=1
+        #    scored=True
+        #    ball.state="reset"
 
 
         font = pygame.font.SysFont(None, 20)
-        draw_text("Score - " + str(score),font,(255,255,255), screen, 50, 50)
+        draw_text("Current Player Score - " + str(player.score),font,(255,255,255), screen, 50, 50)
+
 
 
 
@@ -285,6 +284,9 @@ def game():
             click=True
             ball.rect.x = random.randint(200,800)
             ball.rect.y = 800
+            shadow.rect.x =ball.rect.x
+            shadow.rect.y =ball.rect.y
+
         #    shadow = Shadow(WHITE, 35, 35)
 
 
@@ -293,9 +295,8 @@ def game():
 
 
         # target_list.draw(screen) # draw target
-        # goalkeeper_list.draw(screen) # draw goalkeeper        
-        # for t in target_list:
-        #     t.update()
+        # goalkeeper_list.draw(screen) # draw goalkeeper
+
         ball.update()
 
 
