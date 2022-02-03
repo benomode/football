@@ -161,18 +161,11 @@ def game():
 
     from goal import Goal
     from goal import goal_list
-    from goal import Topleft
-    from goal import Topright
-    from goal import Bottomleft
-    from goal import Bottomright
 
     goal = Goal(OTHER, 290, 120)
     goal.rect.x = 200
     goal.rect.y = 100
 
-    topleft = Topleft(WHITE, 100,100)
-    topleft.rect.x = 200
-    topleft.rect.y = 100
 
     from goalkeeper import Goalkeeper
     from goalkeeper import goalkeeper_list
@@ -263,12 +256,9 @@ def game():
             rotimage = pygame.transform.rotate(arrow,angle)
             rect = rotimage.get_rect(center=(rotx,roty-100))
             screen.blit(rotimage,rect)
-<<<<<<< HEAD
             # screen.blit(goalie.gk_ready_animate[1], (350,105))
             
-=======
 
->>>>>>> 20c64ffa4592c48fc2c14af9e6e93ef925b05c04
 
         keys = pygame.key.get_pressed()
         if keys[pygame.K_RIGHT]:
