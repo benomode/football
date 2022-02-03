@@ -22,3 +22,74 @@ class Goal(pygame.sprite.Sprite):
 
         goal_list.add(self)
 
+class Topleft(pygame.sprite.Sprite):
+
+
+    def __init__(self, color, width, height):
+
+        super().__init__()
+
+
+        self.image = pygame.Surface([width, height])
+        self.image.fill(WHITE)
+        self.image.set_colorkey(OTHER)
+
+        pygame.draw.rect(self.image, color, [0, 0, width, height])
+
+        self.rect = self.image.get_rect()
+
+        goal_list.add(self)
+
+class Topright(pygame.sprite.Sprite):
+
+
+    def __init__(self, color, width, height):
+
+        super().__init__()
+
+
+        self.image = pygame.Surface([width, height])
+        self.image.fill(WHITE)
+        self.image.set_colorkey(OTHER)
+
+        pygame.draw.rect(self.image, color, [0, 0, width, height])
+
+        self.rect = self.image.get_rect()
+
+        goal_list.add(self)
+
+class Bottomleft(pygame.sprite.Sprite):
+
+
+    def __init__(self, color, width, height):
+
+        super().__init__()
+
+
+        self.image = pygame.Surface([width, height])
+        self.image.fill(WHITE)
+        self.image.set_colorkey(OTHER)
+
+        pygame.draw.rect(self.image, color, [0, 0, width, height])
+
+        self.rect = self.image.get_rect()
+
+        goal_list.add(self)
+
+class Bottomright(pygame.sprite.Sprite):
+
+
+    def __init__(self, color, width, height):
+
+        super().__init__()
+
+
+        self.image = pygame.Surface([width, height])
+        self.image.fill(WHITE)
+        self.image.set_colorkey(OTHER)
+
+        pygame.draw.rect(self.image, color, [0, 0, width, height])
+
+        self.rect = self.image.get_rect()
+
+        goal_list.add(self)
