@@ -1,0 +1,76 @@
+{"frames": {
+
+"goalkeeper_animation_1.png":
+{
+	"frame": {"x":0,"y":0,"w":400,"h":433},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":400,"h":433},
+	"sourceSize": {"w":400,"h":433}
+},
+"goalkeeper_animation_2.png":
+{
+	"frame": {"x":400,"y":0,"w":400,"h":433},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":400,"h":433},
+	"sourceSize": {"w":400,"h":433}
+},
+"goalkeeper_animation_3.png":
+{
+	"frame": {"x":0,"y":433,"w":400,"h":433},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":400,"h":433},
+	"sourceSize": {"w":400,"h":433}
+},
+"goalkeeper_animation_4.png":
+{
+	"frame": {"x":400,"y":433,"w":400,"h":433},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":400,"h":433},
+	"sourceSize": {"w":400,"h":433}
+},
+"goalkeeper_animation_5.png":
+{
+	"frame": {"x":0,"y":866,"w":400,"h":433},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":400,"h":433},
+	"sourceSize": {"w":400,"h":433}
+},
+"goalkeeper_animation_6.png":
+{
+	"frame": {"x":400,"y":866,"w":400,"h":433},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":400,"h":433},
+	"sourceSize": {"w":400,"h":433}
+},
+"goalkeeper_animation_7.png":
+{
+	"frame": {"x":0,"y":1299,"w":400,"h":433},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":400,"h":433},
+	"sourceSize": {"w":400,"h":433}
+},
+"goalkeeper_animation_8.png":
+{
+	"frame": {"x":400,"y":1299,"w":400,"h":433},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":400,"h":433},
+	"sourceSize": {"w":400,"h":433}
+}},
+"meta": {
+	"app": "https://www.codeandweb.com/texturepacker",
+	"version": "1.0",
+	"image": "goalkeeper.png",
+	"format": "RGBA8888",
+	"size": {"w":800,"h":1732},
+	"scale": "1",
+	"smartupdate": "$TexturePacker:SmartUpdate:be4e1f94a6307705a2c853fd4a813423:9eec3b0a7296953d736db47489c0563f:c02c47ab185402386bcb91166f35b49f$"
+}
+}

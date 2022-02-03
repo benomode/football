@@ -19,6 +19,7 @@ mainClock = pygame.time.Clock()
 from pygame.locals import *
 from ball import Ball
 from shadow import Shadow
+from spritesheet import Spritesheet
 
 
 pygame.init()
@@ -169,7 +170,7 @@ def game():
     from goalkeeper import goalkeeper_list
 
 
-    goalie = Goalkeeper(420,180)
+    goalie = Goalkeeper((350,105))
 
     from player import Player
     from player import player_list
@@ -189,16 +190,20 @@ def game():
     all_sprites_list.add(goal)
     all_sprites_list.add(target_list)
     all_sprites_list.add(goalkeeper_list)
+    # all_sprites_list.add(goalie)
     all_sprites_list.add(ball)
 
     click=False
     running = True
     scored=False
+
+
     while running:
 
         screen.fill((0, 0, 0))
         screen.blit(sky, (0, 0))
         screen.blit(grass, (0, 300))
+
 
         font = pygame.font.SysFont(None, 60)
         draw_text('F', font, (255, 204, 102), screen, 330, 30)
@@ -250,6 +255,7 @@ def game():
             rotimage = pygame.transform.rotate(arrow,angle)
             rect = rotimage.get_rect(center=(rotx,roty-100))
             screen.blit(rotimage,rect)
+            # screen.blit(goalie.gk_ready_animate[1], (350,105))
             
 
         keys = pygame.key.get_pressed()
@@ -296,7 +302,7 @@ def game():
         # goalkeeper_list.draw(screen) # draw goalkeeper
 
         ball.update()
-
+        goalie.update()
 
         all_sprites_list.draw(screen)
 
