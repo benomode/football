@@ -162,7 +162,7 @@ def game():
     from goal import Goal
     from goal import goal_list
 
-    goal = Goal(OTHER, 290, 120)
+    goal = Goal(OTHER, 600, 250)
     goal.rect.x = 200
     goal.rect.y = 100
 
@@ -270,8 +270,10 @@ def game():
 
         mx, my = pygame.mouse.get_pos()
 
-        if goal.rect.collidepoint((mx, my)):
-            if click and ball.state=="static":
+        # if goal.rect.collidepoint((mx, my)):
+            # print("$$$$$$$$$$ collided with goal")
+        if click and ball.state == "static" and goal.rect.collidepoint((mx, my)):
+                print("$$$$$$$$$$ click and ball.state is static and mouse cursor in goal rectangle")
                 mytarget = target(mx-25,my-25)
                 target_list.add(mytarget)
                 ball.target = mytarget

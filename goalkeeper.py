@@ -118,14 +118,14 @@ class Goalkeeper(pygame.sprite.Sprite):
             # self.rect.x = self.rect.x - 100
             self._set_cycle_animation(False)
             animate_move = (-100, 0)
-            self.show(self.gk_dive_left_animate, animate_move, 1.5)
+            self.show(self.gk_dive_left_animate, animate_move, 1.2)
             # self.rect.y = y
         elif direction == RIGHT:
             print("RIGHT")
             # self.rect.x = self.rect.x + 100
             self._set_cycle_animation(False)
             animate_move = (75, 0)
-            self.show(self.gk_dive_right_animate, animate_move, 1.5)
+            self.show(self.gk_dive_right_animate, animate_move, 1.2)
         elif direction == STAY:
             print("STAY PUT")
             self._set_cycle_animation(False)

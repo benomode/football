@@ -98,10 +98,12 @@ class Ball(pygame.sprite.Sprite):
 
 
     def shoot(self, pos):
+        print("shoot")
         self.state = "moving"
         self.vx = (pos[0]-self.rect.x) / 100
         self.vy = (pos[1]-self.rect.y) / 100
         self.angle =  30 * (350-pos[1])/250
+        print("vx  {}  vy {} angle {}".format(self.vx, self.vy, self.angle))
         #print(self.angle)
         self.shadow.shoot(pos)
 
