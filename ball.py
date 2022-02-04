@@ -5,6 +5,7 @@ from goal import goal_list
 from player import player_list
 import random
 from math import tan, atan, radians, degrees
+from hoarding import hoarding_list
 
 WHITE = (255,255,255)
 removeBallAfterMs = 1550   # number of milliseconds to wait until we remove the football
@@ -42,11 +43,21 @@ class Ball(pygame.sprite.Sprite):
             goalscored_list = pygame.sprite.spritecollide(self, goal_list, False)
             if saved_list and self.shadow.rect.y<335:
                 print("SAVE !!!!!!!")
+                if hoarding_list:
+                    print("hoarding list set")
+                    for hoarding in hoarding_list:
+                        print("calling hoarding set text SAVE")
+                        hoarding.set_text('SAVE !!!!!!')
                 self.stop()
 
             elif goalscored_list and self.shadow.rect.y<325:
                 print("GOAL - hitting goal sprite")
                 # give the player with the ball a goal
+                if hoarding_list:
+                    print("hoarding list set")
+                    for hoarding in hoarding_list:
+                        print("calling hoarding set text GOAL")
+                        hoarding.set_text('GOAL !!!!!!')
                 self.player.scored()
                 self.stop()
 

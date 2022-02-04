@@ -173,6 +173,12 @@ def game():
 
     goalie = Goalkeeper((350,105))
 
+    from hoarding import Hoarding
+
+    # hoarding = Hoarding(screen)
+
+
+
     from player import Player
     from player import player_list
 
@@ -191,19 +197,26 @@ def game():
     all_sprites_list.add(goal)
     all_sprites_list.add(target_list)
     all_sprites_list.add(goalkeeper_list)
-    # all_sprites_list.add(goalie)
     all_sprites_list.add(ball)
 
     click=False
     running = True
     scored=False
 
+    position = x,y = 100,470
+    size = w,h = 800,40
+    colour = 0,255,0
+    s = pygame.display.get_surface()
+    r = pygame.Rect(position,size)
+
+    hoarding = Hoarding(screen, "Welcome", 470, "red")
 
     while running:
 
         screen.fill((0, 0, 0))
         screen.blit(sky, (0, 0))
         screen.blit(grass, (0, 300))
+        s.fill("yellow", r)
 
 
         font = pygame.font.SysFont(None, 60)
@@ -307,6 +320,10 @@ def game():
 
         ball.update()
         goalie.update()
+        hoarding.update()
+
+        # for message in messages:
+        #     message.update()
 
         all_sprites_list.draw(screen)
 
