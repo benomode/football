@@ -22,8 +22,11 @@ class Goalkeeper(pygame.sprite.Sprite):
         print("*********** making goalkeeper")
         gk_spritesheet = Spritesheet(os.path.join('images', 'goalkeeper.png'))
             # load the images for the static view of the goalie from the sprite list using the names in the goalkeeper.json file
-        self.gk_ready_animate = [pygame.transform.scale(gk_spritesheet.parse_sprite('goalkeeper_animation_1.png'), (330, 330))
-                            , pygame.transform.scale(gk_spritesheet.parse_sprite('goalkeeper_animation_8.png'), (330, 330))]
+        self.gk_ready_animate = [pygame.transform.scale(gk_spritesheet.parse_sprite('goalkeeper_animation_8.png'), (330, 330))
+]
+
+        # self.gk_ready_animate = [pygame.transform.scale(gk_spritesheet.parse_sprite('goalkeeper_animation_1.png'), (330, 330))
+        #                     , pygame.transform.scale(gk_spritesheet.parse_sprite('goalkeeper_animation_8.png'), (330, 330))]
         self.gk_dive_left_animate = [pygame.transform.scale(gk_spritesheet.parse_sprite('goalkeeper_animation_5.png'), (330, 330))
                             , pygame.transform.scale(gk_spritesheet.parse_sprite('goalkeeper_animation_4.png'), (330, 330))]
         self.gk_dive_right_animate = [pygame.transform.scale(gk_spritesheet.parse_sprite('goalkeeper_animation_2.png'), (330, 330))

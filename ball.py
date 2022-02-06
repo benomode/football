@@ -38,9 +38,10 @@ class Ball(pygame.sprite.Sprite):
 
         if self.time is None:
                 # did it hit a goal keeper sprite?
-            saved_list = pygame.sprite.spritecollide(self, goalkeeper_list, False,pygame.sprite.collide_mask)
+            saved_list = pygame.sprite.spritecollide(self, goalkeeper_list, False, pygame.sprite.collide_mask)
                 # did it hit a goal sprite
             goalscored_list = pygame.sprite.spritecollide(self, goal_list, False)
+            hit_list = pygame.sprite.spritecollide(self, target_list, False, pygame.sprite.collide_mask)
             if saved_list and self.shadow.rect.y<335:
                 print("SAVE !!!!!!!")
                 if hoarding_list:
@@ -49,6 +50,17 @@ class Ball(pygame.sprite.Sprite):
                         print("calling hoarding set text SAVE")
                         hoarding.set_text('SAVE !!!!!!')
                 self.stop()
+            elif hit_list:
+                for target in hit_list:
+                    print("GOAL - hitting the target with value " + str(target.value))
+                    if hoarding_list:
+                        print("hoarding list set")
+                        for hoarding in hoarding_list:
+                            print("calling hoarding set text GOAL")
+                            hoarding.set_text('GOAL !!!!!! {}'.format(target.value))
+                    #self.player.score += goal.score
+                    #stats(self.player.score)
+                    self.stop()
 
             elif goalscored_list and self.shadow.rect.y<325:
                 print("GOAL - hitting goal sprite")
@@ -60,13 +72,6 @@ class Ball(pygame.sprite.Sprite):
                         hoarding.set_text('GOAL !!!!!!')
                 self.player.scored()
                 self.stop()
-
-                hit_list = pygame.sprite.spritecollide(self, target_list, False)
-                for target in hit_list:
-                    print("GOAL - hitting the target")
-                    #self.player.score += goal.score
-                    #stats(self.player.score)
-                    self.stop()
 
         else:
                     # and x ms have elapsed, remove the football.
@@ -99,7 +104,7 @@ class Ball(pygame.sprite.Sprite):
         self.rect.x = 480
         self.rect.y = 800
         self.rect.x = random.randint(200,800)
-        self.target.kill()  # get rid of the target object
+        # self.target.kill()  # get rid of the target object
         self.shadow.rect.x = self.rect.x
         self.shadow.rect.y = self.rect.y
         self.shadow.ball = self

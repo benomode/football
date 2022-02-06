@@ -52,7 +52,6 @@ class Hoarding():
             if self.position > -500: # self.text_surface.get_width():
                 self.position -= 1
             else:
-                print("should stop")
                 self.text_surface.fill("yellow")
                 self.text = ""
 
