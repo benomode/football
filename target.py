@@ -3,7 +3,7 @@ import os
 
 target_list = pygame.sprite.Group()
 
-EXTRA_GOAL = 1
+EXTRA_GOAL = 2
 EXTRA_BALL = 1
 
 class target(pygame.sprite.Sprite):

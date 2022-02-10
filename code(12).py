@@ -256,7 +256,7 @@ def game():
 
         font = pygame.font.SysFont(None, 20)
         draw_text("Current Player Score - " + str(player.score),font,(255,255,255), screen, 50, 50)
-
+        draw_text("Current Player Balls Left - " + str(player.balls),font,(255,255,255), screen, 50, 70)
 
 
 

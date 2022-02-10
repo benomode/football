@@ -1,5 +1,5 @@
 import pygame
-from target import target_list
+from target import EXTRA_BALL, target_list
 from goalkeeper import goalkeeper_list
 from goal import goal_list
 from player import player_list
@@ -57,7 +57,15 @@ class Ball(pygame.sprite.Sprite):
                         print("hoarding list set")
                         for hoarding in hoarding_list:
                             print("calling hoarding set text GOAL")
-                            hoarding.set_text('GOAL !!!!!! {}'.format(target.value))
+                            if target.targetType == EXTRA_BALL:
+                                hoarding.set_text('GOAL !!!!!! Bonus {}'.format(target.value))
+                                if self.player:
+                                    self.player.bonusscore(2)
+                            else:
+                                hoarding.set_text('GOAL !!!!!! Bonus Ball')
+                                self.player.scored()
+                                self.player.bonusball(1)
+
                     #self.player.score += goal.score
                     #stats(self.player.score)
                     self.stop()
@@ -78,6 +86,8 @@ class Ball(pygame.sprite.Sprite):
             if pygame.time.get_ticks() - self.time >= removeBallAfterMs:
                 self.time = None
                 self.reset()
+                if self.player:
+                    self.player.balls -= 1
 
     def curveRight(self, pixels):
 

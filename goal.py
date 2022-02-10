@@ -32,5 +32,5 @@ class Goal(pygame.sprite.Sprite):
         print("create between {} and {}".format(self.rect.x, self.rect.y))
 
         mytarget = target(250, 150, 2, EXTRA_GOAL)
-        mytarget = target(300, 200, 2, EXTRA_BALL)
+        mytarget = target(450, 200, 2, EXTRA_BALL)
         # mytarget = target(mx-25, my-25, EXTRA_GOAL)
