@@ -7,6 +7,7 @@ import random
 from math import tan, atan, radians, degrees
 from hoarding import hoarding_list
 
+
 WHITE = (255,255,255)
 removeBallAfterMs = 1550   # number of milliseconds to wait until we remove the football
 
@@ -85,9 +86,10 @@ class Ball(pygame.sprite.Sprite):
                     # and x ms have elapsed, remove the football.
             if pygame.time.get_ticks() - self.time >= removeBallAfterMs:
                 self.time = None
-                self.reset()
                 if self.player:
                     self.player.balls -= 1
+#                    self.checkEndGame()
+                self.reset()
 
     def curveRight(self, pixels):
 

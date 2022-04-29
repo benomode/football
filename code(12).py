@@ -14,6 +14,8 @@ import os
 import random
 from target import target
 from target import target_list
+from tkinter import *
+from tkinter import messagebox
 
 
 mainClock = pygame.time.Clock()
@@ -327,6 +329,24 @@ def game():
         ball.update()
         goalie.update()
         hoarding.update()
+
+        # gameover section
+        gameover = player.checkGameOver()
+        if gameover:
+            Tk().wm_withdraw() #to hide the main window
+            
+            res = messagebox.askquestion('askquestion', 'You scored ' + str(player.score) + '\nDo you want to play again ?')
+            if res == 'yes':
+                running = False
+                player.kill()
+                goalie.kill()
+
+                game()
+            elif res == 'no':
+                pygame.quit()
+                sys.exit()
+
+
 
         # for message in messages:
         #     message.update()

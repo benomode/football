@@ -12,7 +12,7 @@ class Player(pygame.sprite.Sprite):
 
         print("*********** making player")
         self.score = 0
-        self.balls = 5
+        self.balls = 1
 
         player_list.add(self)
 
@@ -29,4 +29,10 @@ class Player(pygame.sprite.Sprite):
     def bonusball(self, amount):
         print("PLAYER GOT BONUE BALL")
         self.balls += amount
-        print("PLAYER now has {} balls".format(self.balls))       
+        print("PLAYER now has {} balls".format(self.balls))      
+
+    def checkGameOver(self):
+        gameover = False
+        if self.balls <= 0:
+            gameover = True
+        return gameover
