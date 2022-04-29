@@ -12,7 +12,7 @@ class Player(pygame.sprite.Sprite):
 
         print("*********** making player")
         self.score = 0
-        self.balls = 1
+        self.balls = 5
 
         player_list.add(self)
 
